@@ -3,13 +3,26 @@ services:
   app:
     build: ./infra/php
     volumes:
-      - ./front:/data
+      - ./backend:/work
+
+  backend:
+    image: nginx:1.20-alpine
+    build:
+      dockerfile: ./infra/php/Dockerfile
+    container_name: laravel_app
+    volumes:
+      - ./backend:/work
+      - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    working_dir: /work
+    ports:
+      - "10082:80"
 
   web:
-    image: nginx:1.20-alpine
-    ports:
-      - 10082:80
+    build:
+      context: ./web
+    container_name: react_app
     volumes:
-      - ./front:/data
-      - ./infra/nginx/default.conf:/etc/nginx/conf.d/default.conf
-    working_dir: /data
+      - ./web:/app
+    command: sh -c "npm start"
+    ports:
+      - "3000:3000"
