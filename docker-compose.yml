@@ -16,6 +16,11 @@ services:
       - 10082:80
     working_dir: /data
 
+  db:
+    build: ./infra/mysql
+    volumes:
+      - db-store:/var/lib/mysql
+
   web:
     build:
       context: ./web
@@ -25,3 +30,6 @@ services:
     command: sh -c "npm start"
     ports:
       - "3000:3000"
+
+volumes:
+  db-store:
