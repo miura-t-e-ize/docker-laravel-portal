@@ -1,12 +1,18 @@
 import './App.css';
-import {Login} from './Login';
+import { Routes, Route } from "react-router-dom";
+import { Top } from './pages/Top';
+import { Login } from './pages/Login';
 
 function App() {
   return (
     <>
-      <Login />
+      <h1>router-test</h1>
+      <Routes>
+        <Route path="/" element={ <Login /> } />
+        <Route path="/login" element={ <Login /> } />
+        <Route path="/top" element={ <Top /> } />
+      </Routes>
     </>
-
   );
 }
 

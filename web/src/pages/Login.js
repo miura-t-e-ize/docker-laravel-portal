@@ -28,12 +28,14 @@ export const Login = () => {
   return (
     <>
       <table>
-        <tr>
+        <tbody>
+          <tr>
             <th>ID</th>
             <th>メールアドレス</th>
             <th>名前</th>
-        </tr>
-        {show_employees_list}
+          </tr>
+          {show_employees_list}
+        </tbody>
       </table>
     </>
   )
